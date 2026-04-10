@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エナジーチェック</title>
 
+<style>
+body {
+  font-family: "Hiragino Maru Gothic ProN", sans-serif;
+  background: #f7faff;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.center { text-align: center; }
+
+.hidden { display: none; }
+
+h1 {
+  font-size: 22px;
+  color: #4a5fd1;
+}
+
+.question-title {
+  font-size: 18px;
+  color: #4a5fd1;
+  margin-bottom: 10px;
+}
+
+.option {
+  display: block;
+  margin: 8px 0;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-main {
+  background: linear-gradient(45deg,#5c6cff,#8b6bff);
+  color: white;
+}
+
+.btn-sub {
+  background: white;
+  border: 1px solid #ccc;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- 表紙 -->
+<div id="cover" class="card center">
+  <img src="./images/cs_energy.png" style="width:100%; border-radius:15px;">
+  <h1>
+  チャッピー＆サリーのエナジーチェック🐾<br>
+  <small>〜今のあなたのエネルギーをやさしく感じてみよう〜</small>
+  </h1>
+
+  <button class="btn-main" onclick="start()">🌿 はじめる</button>
+</div>
+
+<!-- 名前 -->
+<div id="namePage" class="card hidden center">
+  <h2>お名前を教えてね🐾</h2>
+  <input id="name" placeholder="さちよ" style="padding:10px; border-radius:10px;">
+  <br>
+  <button class="btn-main" onclick="next()">つぎへ</button>
+</div>
+
+<!-- 質問 -->
+<div id="quiz" class="card hidden"></div>
+
+<!-- 結果 -->
+<div id="result" class="card hidden"></div>
+
+</div>
+
+<script>
+
+const questions = [
+"今どんな状態？",
+"最近の流れは？",
+"今ほしいものは？",
+"どうなりたい？",
+"直感で選ぶなら？"
+];
+
+const choices = [
+["軽い","重い","ぼーっと","バタバタ","停滞"],
+["いい感じ","普通","ズレてる","停滞","不明"],
+["癒し","スッキリ","流れ","守護","軽さ"],
+["安心","ワクワク","スムーズ","落ち着き","自由"],
+["ゆるめたい","整えたい","変えたい","守りたい","引き寄せたい"]
+];
+
+let answers = [];
+
+function start(){
+  document.getElementById("cover").classList.add("hidden");
+  document.getElementById("namePage").classList.remove("hidden");
+}
+
+function next(){
+  document.getElementById("namePage").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  showQuestion(0);
+}
+
+function showQuestion(i){
+  if(i >= questions.length){
+    showResult();
+    return;
+  }
+
+  let html = `<div class="question-title">${questions[i]}</div>`;
+
+  choices[i].forEach(c=>{
+    html += `<button class="option" onclick="answer('${c}',${i})">${c}</button>`;
+  });
+
+  document.getElementById("quiz").innerHTML = html;
+}
+
+function answer(val, i){
+  answers.push(val);
+  showQuestion(i+1);
+}
+
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  let name = document.getElementById("name").value || "あなた";
+
+  let message = `
+${name}さんの今のエネルギー🌿
+
+少し流れを整えたいタイミングかも🐾
+無理に変えなくても大丈夫。
+やさしく整えることで自然と流れが変わりそう✨
+
+🌈ヒント
+がんばるより、安心できるほうを選んでみてね。
+`;
+
+  let html = `<p>${message}</p>`;
+
+  html += `
+  <button class="btn-main" onclick="goShop()">💎 気になる子をのぞいてみる</button>
+  <br>
+  <button class="btn-sub" onclick="retry()">もう一度やってみる</button>
+  <br>
+  <button class="btn-sub" onclick="goFun()">🌈 もっと遊ぶ</button>
+  `;
+
+  document.getElementById("result").innerHTML = html;
+}
+
+function retry(){
+  answers = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  showQuestion(0);
+}
+
+function goFun(){
+  window.location.href = "https://lit.link/chappysally";
+}
+
+function goShop(){
+  window.location.href = "https://lit.link/chappysally";
+}
+
+</script>
+
+</body>
+</html>
