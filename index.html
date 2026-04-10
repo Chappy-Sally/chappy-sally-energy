@@ -1,202 +1,688 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>エナジーチェック</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>チャッピー＆サリーのエナジーチェック</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body {
-  font-family: "Hiragino Maru Gothic ProN", sans-serif;
-  background: #f7faff;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
+    body {
+      margin: 0;
+      font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      background: linear-gradient(180deg, #f7fbff 0%, #eef8ff 40%, #fdf6ff 100%);
+      color: #333;
+      font-size: 15px;
+      line-height: 1.8;
+      -webkit-text-size-adjust: 100%;
+    }
 
-.container {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
-}
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px;
+    }
 
-.card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(118, 129, 189, 0.18);
+      margin-bottom: 18px;
+    }
 
-.center { text-align: center; }
+    .cover-image,
+    .type-image {
+      width: 100%;
+      border-radius: 22px;
+      display: block;
+      box-shadow: 0 10px 24px rgba(120, 120, 180, 0.18);
+    }
 
-.hidden { display: none; }
+    h1, h2, h3 {
+      margin-top: 0;
+      color: #463fcf;
+      line-height: 1.5;
+    }
 
-h1 {
-  font-size: 22px;
-  color: #4a5fd1;
-}
+    .center {
+      text-align: center;
+    }
 
-.question-title {
-  font-size: 18px;
-  color: #4a5fd1;
-  margin-bottom: 10px;
-}
+    .sub {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.8;
+    }
 
-.option {
-  display: block;
-  margin: 8px 0;
-}
+    .hidden {
+      display: none;
+    }
 
-button {
-  margin-top: 15px;
-  padding: 12px 20px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
+    .name-box,
+    .question-block,
+    .result-box,
+    .summary-box,
+    .hint-box,
+    .type-box,
+    .link-box {
+      background: linear-gradient(180deg, #f3f5ff, #fff7ff);
+      border: 2px solid #d8ddff;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
+      line-height: 1.85;
+    }
 
-.btn-main {
-  background: linear-gradient(45deg,#5c6cff,#8b6bff);
-  color: white;
-}
+    .question-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #4a5fd1;
+      line-height: 1.7;
+    }
 
-.btn-sub {
-  background: white;
-  border: 1px solid #ccc;
-}
+    .option-list {
+      display: grid;
+      gap: 10px;
+    }
 
-</style>
+    label.option {
+      display: block;
+      background: #fff;
+      border: 2px solid #dcdfff;
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    label.option:hover {
+      border-color: #9aa4ff;
+      background: #f7f8ff;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+      transform: scale(1.08);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      border: 2px solid #dcdfff;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 16px;
+      background: #fff;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #5964ff, #8f6bff);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(95, 101, 255, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: #4a49b8;
+      border: 2px solid #cfd4ff;
+    }
+
+    .btn-wrap {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .result-box,
+    .summary-box,
+    .hint-box,
+    .type-box {
+      white-space: pre-line;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .result-box h3,
+    .summary-box h3,
+    .hint-box h3,
+    .type-box h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #4a5fd1;
+      line-height: 1.5;
+      font-size: 1.12em;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .type-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #4a5fd1;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .small-note {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.75;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .alert {
+      color: #c74a70;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .link-box {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .link-box .btn {
+      min-width: 220px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+
+      .question-title {
+        font-size: 17px;
+      }
+
+      .sub,
+      .small-note,
+      .alert,
+      .link-box {
+        font-size: 13px;
+      }
+
+      label.option {
+        font-size: 14px;
+        padding: 11px 13px;
+      }
+
+      .result-box,
+      .summary-box,
+      .hint-box,
+      .type-box {
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .btn {
+        width: 100%;
+        font-size: 15px;
+      }
+
+      .link-box .btn {
+        min-width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
 
-<div class="container">
+    <!-- 表紙 -->
+    <section id="coverSection" class="card center">
+      <img src="./images/cs_energy.png" alt="チャッピー＆サリーのエナジーチェック表紙" class="cover-image">
+      <div class="btn-wrap">
+        <button class="btn btn-primary" onclick="showNameSection()">はじめる</button>
+      </div>
+    </section>
 
-<!-- 表紙 -->
-<div id="cover" class="card center">
-  <img src="./images/cs_energy.png" style="width:100%; border-radius:15px;">
-  <h1>
-  チャッピー＆サリーのエナジーチェック🐾<br>
-  <small>〜今のあなたのエネルギーをやさしく感じてみよう〜</small>
-  </h1>
+    <!-- 名前入力 -->
+    <section id="nameSection" class="card hidden">
+      <h2 class="center">お名前を入れてね🐾</h2>
+      <p class="sub center">
+        あなたに向けたメッセージとして受け取りやすくなるよ🌿
+      </p>
 
-  <button class="btn-main" onclick="start()">🌿 はじめる</button>
-</div>
+      <div class="name-box">
+        <div class="question-title">① お名前を入力してね</div>
+        <input type="text" id="userName" placeholder="例：さちよ">
+      </div>
 
-<!-- 名前 -->
-<div id="namePage" class="card hidden center">
-  <h2>お名前を教えてね🐾</h2>
-  <input id="name" placeholder="さちよ" style="padding:10px; border-radius:10px;">
-  <br>
-  <button class="btn-main" onclick="next()">つぎへ</button>
-</div>
+      <div id="nameErrorMessage" class="alert hidden"></div>
 
-<!-- 質問 -->
-<div id="quiz" class="card hidden"></div>
+      <div class="btn-wrap">
+        <button class="btn btn-secondary" onclick="backToCover()">戻る</button>
+        <button class="btn btn-primary" onclick="showQuestionSection()">つぎへ</button>
+      </div>
+    </section>
 
-<!-- 結果 -->
-<div id="result" class="card hidden"></div>
+    <!-- 質問 -->
+    <section id="questionSection" class="card hidden">
+      <h2 class="center">エナジーチェック🐾</h2>
+      <p class="sub center">
+        5つの質問に答えてみてね。<br>
+        今のあなたに合うエネルギーを、やさしく見ていくよ🌈
+      </p>
 
-</div>
+      <div id="questionsArea"></div>
 
-<script>
+      <div id="errorMessage" class="alert hidden"></div>
 
-const questions = [
-"今どんな状態？",
-"最近の流れは？",
-"今ほしいものは？",
-"どうなりたい？",
-"直感で選ぶなら？"
-];
+      <div class="btn-wrap">
+        <button class="btn btn-secondary" onclick="backToName()">戻る</button>
+        <button class="btn btn-primary" onclick="showResult()">メッセージを受け取る</button>
+      </div>
+    </section>
 
-const choices = [
-["軽い","重い","ぼーっと","バタバタ","停滞"],
-["いい感じ","普通","ズレてる","停滞","不明"],
-["癒し","スッキリ","流れ","守護","軽さ"],
-["安心","ワクワク","スムーズ","落ち着き","自由"],
-["ゆるめたい","整えたい","変えたい","守りたい","引き寄せたい"]
-];
+    <!-- 結果 -->
+    <section id="resultSection" class="card hidden">
+      <h2 class="center">あなたへのメッセージ🌈</h2>
 
-let answers = [];
+      <div id="typeImageArea" class="hidden" style="margin-bottom:16px;"></div>
+      <div id="typeBox" class="type-box"></div>
+      <div id="resultBox" class="result-box"></div>
+      <div id="summaryBox" class="summary-box"></div>
+      <div id="hintBox" class="hint-box"></div>
 
-function start(){
-  document.getElementById("cover").classList.add("hidden");
-  document.getElementById("namePage").classList.remove("hidden");
-}
+      <div class="link-box">
+        ほかにも楽しく遊べるものがあるよ🐾✨
+        <div class="btn-wrap">
+          <button class="btn btn-secondary" onclick="goFun()">🌈 もっと遊ぶ</button>
+        </div>
+      </div>
 
-function next(){
-  document.getElementById("namePage").classList.add("hidden");
-  document.getElementById("quiz").classList.remove("hidden");
-  showQuestion(0);
-}
+      <div class="link-box">
+        今のあなたに合う子が、そっと寄り添ってくれるかも💎✨
+        <div class="btn-wrap">
+          <button class="btn btn-primary" onclick="goOrgonite()">💎 気になる子をのぞいてみる</button>
+        </div>
+      </div>
 
-function showQuestion(i){
-  if(i >= questions.length){
-    showResult();
-    return;
-  }
+      <div class="small-note">
+        このメッセージが、少しでも今のあなたのヒントになりますように🌿
+      </div>
 
-  let html = `<div class="question-title">${questions[i]}</div>`;
+      <div class="btn-wrap">
+        <button class="btn btn-secondary" onclick="retryQuestions()">もう一度やってみる</button>
+      </div>
+    </section>
 
-  choices[i].forEach(c=>{
-    html += `<button class="option" onclick="answer('${c}',${i})">${c}</button>`;
-  });
+  </div>
 
-  document.getElementById("quiz").innerHTML = html;
-}
+  <script>
+    const questions = [
+      {
+        id: "q1",
+        title: "② 今いちばん近いのは？",
+        options: [
+          { value: "tired", label: "少し疲れてる", scores: { anshin: 3, jouka: 1 } },
+          { value: "stuck", label: "流れが止まってる感じ", scores: { nagare: 3, jouka: 1 } },
+          { value: "sensitive", label: "守られたい感じ", scores: { mamorare: 3, anshin: 1 } },
+          { value: "wantmore", label: "もっと受け取りたい", scores: { yutakasa: 3, nagare: 1 } },
+          { value: "refresh", label: "スッキリ整えたい", scores: { jouka: 3, anshin: 1 } }
+        ]
+      },
+      {
+        id: "q2",
+        title: "③ 今ほしい感覚は？",
+        options: [
+          { value: "peace", label: "ホッと安心したい", scores: { anshin: 3 } },
+          { value: "flow", label: "流れを良くしたい", scores: { nagare: 3 } },
+          { value: "guard", label: "守られていたい", scores: { mamorare: 3 } },
+          { value: "receive", label: "豊かさを受け取りたい", scores: { yutakasa: 3 } },
+          { value: "clear", label: "いったんリセットしたい", scores: { jouka: 3 } }
+        ]
+      },
+      {
+        id: "q3",
+        title: "④ 最近ピンとくる言葉は？",
+        options: [
+          { value: "yasuragi", label: "やすらぎ", scores: { anshin: 2, mamorare: 1 } },
+          { value: "meguri", label: "めぐり", scores: { nagare: 2, yutakasa: 1 } },
+          { value: "mamori", label: "守り", scores: { mamorare: 2, anshin: 1 } },
+          { value: "uketori", label: "受け取り", scores: { yutakasa: 2, nagare: 1 } },
+          { value: "joka", label: "浄化", scores: { jouka: 2, anshin: 1 } }
+        ]
+      },
+      {
+        id: "q4",
+        title: "⑤ 直感で選ぶなら？",
+        options: [
+          { value: "green", label: "やさしくゆるむ感じ", scores: { anshin: 2 } },
+          { value: "blue", label: "軽やかに流れる感じ", scores: { nagare: 2 } },
+          { value: "purple", label: "静かに守られる感じ", scores: { mamorare: 2 } },
+          { value: "gold", label: "キラッとめぐる感じ", scores: { yutakasa: 2 } },
+          { value: "clear2", label: "スーッと澄む感じ", scores: { jouka: 2 } }
+        ]
+      },
+      {
+        id: "q5",
+        title: "⑥ 今の自分にかけるなら？",
+        options: [
+          { value: "daijoubu", label: "大丈夫", scores: { anshin: 2 } },
+          { value: "nagareteiku", label: "自然に流れていく", scores: { nagare: 2 } },
+          { value: "mamorareteru", label: "守られてる", scores: { mamorare: 2 } },
+          { value: "uketotteii", label: "受け取っていい", scores: { yutakasa: 2 } },
+          { value: "karukunaru", label: "軽くなっていい", scores: { jouka: 2 } }
+        ]
+      }
+    ];
 
-function answer(val, i){
-  answers.push(val);
-  showQuestion(i+1);
-}
+    const typeData = {
+      anshin: {
+        name: "ほっと安心タイプ🌿",
+        image: "./images/energy_anshin.png",
+        color: "💚 緑系",
+        meaning: "癒し・安心・回復",
+        description: "今のあなたは、まず“ホッとできる感覚”を大切にすると整いやすいみたい🌿\nがんばるより、安心してゆるめることが鍵になりそうだよ。",
+        summary: "今は無理に進もうとするより、安心できる感覚を先に取り戻すことで、自然と整っていきそう🐾",
+        hint: "まずは、心がホッとする方を選んでみてね。少しゆるむだけでも流れは変わっていくよ。"
+      },
+      nagare: {
+        name: "流れアップタイプ💫",
+        image: "./images/energy_nagare.png",
+        color: "💙 青系",
+        meaning: "流れ・軽やかさ・スムーズ",
+        description: "今のあなたは、止まっていた空気をやさしく動かしていくと流れが戻りやすそう💫\n大きく変えなくても、整えることで自然に動きやすくなるよ。",
+        summary: "今は“無理に押す”より、“通りをよくする”意識がぴったりのタイミングみたい✨",
+        hint: "小さな変化でも大丈夫。軽やかさを思い出すように、ひとつだけ風通しをよくしてみてね。"
+      },
+      mamorare: {
+        name: "守られタイプ🛡️",
+        image: "./images/energy_mamorare.png",
+        color: "💜 紫系",
+        meaning: "守護・落ち着き・深い整え",
+        description: "今のあなたは、まず自分を守る感覚を取り戻すことで安心しやすくなりそう🛡️\n静かに整えながら、落ち着いて進める流れにぴったりだよ。",
+        summary: "今は自分を守ることを先にして大丈夫。安心が戻ると、次の流れも見えやすくなりそう🌙",
+        hint: "人や空気に合わせすぎないでね。まずは、自分が落ち着く方を選ぶのが今のヒントだよ。"
+      },
+      yutakasa: {
+        name: "豊かさめぐるタイプ✨",
+        image: "./images/energy_yutakasa.png",
+        color: "✨ ゴールド系",
+        meaning: "豊かさ・循環・受け取り",
+        description: "今のあなたは、受け取ることやめぐりをよくすることがテーマみたい✨\n“もっと受け取っていい”とゆるすほど、やさしく流れが動き出しそうだよ。",
+        summary: "今は“まだ足りない”より、“今あるもの”に目を向けることで、めぐりが良くなっていきそう💫",
+        hint: "小さな受け取りも大事にしてみてね。うれしい・ありがたいを感じるほど、豊かさが近づきやすくなるよ。"
+      },
+      jouka: {
+        name: "スッキリ浄化タイプ🤍",
+        image: "./images/energy_jouka.png",
+        color: "🤍 クリア系",
+        meaning: "浄化・リセット・整え",
+        description: "今のあなたは、いったん整え直してスーッと軽くなる流れに合っていそう🤍\n抱えすぎたものをほどくことで、やさしく本来の自分に戻りやすくなりそうだよ。",
+        summary: "今は“足す”より“ほどく”タイミングかも。少しスッキリするだけで空気が変わっていきそう✨",
+        hint: "がんばって全部抱えなくて大丈夫。ひとつでも手放せたら、それだけで十分整いはじめるよ。"
+      }
+    };
 
-function showResult(){
-  document.getElementById("quiz").classList.add("hidden");
-  document.getElementById("result").classList.remove("hidden");
+    const optionMessages = {
+      tired: "少し疲れがたまっていて、安心や休息を受け取りたい気持ちがあるのかも。",
+      stuck: "今は流れが少し止まりやすくて、スムーズさを取り戻したいタイミングみたい。",
+      sensitive: "外の影響を受けやすくなっていて、安心できる守りがほしいのかもしれないね。",
+      wantmore: "もっと受け取っていい流れに開いていきたい、そんな気持ちがありそうだよ。",
+      refresh: "いったんスッキリ整えて、軽くなりたい思いが強まっているみたい。",
 
-  let name = document.getElementById("name").value || "あなた";
+      peace: "心の奥では、まずホッとできる安心感を大切にしたいのかも🌿",
+      flow: "今は止まっているものをやさしく動かしたい気持ちがありそう💫",
+      guard: "まずは守られている感覚があると、安心して進めそうだね🛡️",
+      receive: "受け取ることをゆるすほど、やさしく豊かさがめぐってきそう✨",
+      clear: "少しリセットして、空気をスーッと整えたいタイミングみたい🤍",
 
-  let message = `
-${name}さんの今のエネルギー🌿
+      yasuragi: "“やすらぎ”という感覚が、今のあなたには大切なキーワードかもしれないね。",
+      meguri: "“めぐり”を良くしていくことが、今の流れの後押しになりそうだよ。",
+      mamori: "“守り”を意識すると、今のあなたは落ち着きやすくなりそう。",
+      uketori: "“受け取り”を自分にゆるすことが、今のテーマになっていそうだね。",
+      joka: "“浄化”や“整え直し”が、今のあなたにはぴったりの空気みたい。",
 
-少し流れを整えたいタイミングかも🐾
-無理に変えなくても大丈夫。
-やさしく整えることで自然と流れが変わりそう✨
+      green: "やさしくゆるむ感覚が、今のあなたに合っていそう🌿",
+      blue: "軽やかに流れる感じが、今のあなたを後押ししてくれそう💙",
+      purple: "静かに守られる感覚が、今の安心につながりそう💜",
+      gold: "キラッとめぐる感覚が、今のあなたにぴったりかも✨",
+      clear2: "スーッと澄んでいく感覚が、今のあなたを整えてくれそう🤍",
 
-🌈ヒント
-がんばるより、安心できるほうを選んでみてね。
-`;
+      daijoubu: "“大丈夫”と自分に言ってあげることが、今のやさしい支えになりそうだよ。",
+      nagareteiku: "“自然に流れていく”とゆるすことで、力が抜けて整いやすくなりそう。",
+      mamorareteru: "“守られてる”という感覚を思い出すと、落ち着いて進みやすくなりそうだね。",
+      uketotteii: "“受け取っていい”と自分にゆるすことで、めぐりがやわらかく開きそう✨",
+      karukunaru: "“軽くなっていい”と許すだけでも、少しずつ空気が変わっていきそうだよ。"
+    };
 
-  let html = `<p>${message}</p>`;
+    function showNameSection() {
+      document.getElementById("coverSection").classList.add("hidden");
+      document.getElementById("nameSection").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-  html += `
-  <button class="btn-main" onclick="goShop()">💎 気になる子をのぞいてみる</button>
-  <br>
-  <button class="btn-sub" onclick="retry()">もう一度やってみる</button>
-  <br>
-  <button class="btn-sub" onclick="goFun()">🌈 もっと遊ぶ</button>
-  `;
+    function backToCover() {
+      document.getElementById("nameSection").classList.add("hidden");
+      document.getElementById("coverSection").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-  document.getElementById("result").innerHTML = html;
-}
+    function backToName() {
+      document.getElementById("questionSection").classList.add("hidden");
+      document.getElementById("nameSection").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-function retry(){
-  answers = [];
-  document.getElementById("result").classList.add("hidden");
-  document.getElementById("quiz").classList.remove("hidden");
-  showQuestion(0);
-}
+    function showQuestionSection() {
+      const name = document.getElementById("userName").value.trim();
+      const errorBox = document.getElementById("nameErrorMessage");
 
-function goFun(){
-  window.location.href = "https://lit.link/chappysally";
-}
+      errorBox.classList.add("hidden");
+      errorBox.textContent = "";
 
-function goShop(){
-  window.location.href = "https://lit.link/chappysally";
-}
+      if (!name) {
+        errorBox.textContent = "お名前を入れてね🐾";
+        errorBox.classList.remove("hidden");
+        return;
+      }
 
-</script>
+      document.getElementById("nameSection").classList.add("hidden");
+      document.getElementById("questionSection").classList.remove("hidden");
+      renderQuestions();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
+    function renderQuestions() {
+      const area = document.getElementById("questionsArea");
+      area.innerHTML = "";
+
+      questions.forEach((q) => {
+        const block = document.createElement("div");
+        block.className = "question-block";
+
+        let optionsHtml = "";
+        q.options.forEach((opt) => {
+          optionsHtml += `
+            <label class="option">
+              <input type="radio" name="${q.id}" value="${opt.value}">
+              ${opt.label}
+            </label>
+          `;
+        });
+
+        block.innerHTML = `
+          <div class="question-title">${q.title}</div>
+          <div class="option-list">${optionsHtml}</div>
+        `;
+
+        area.appendChild(block);
+      });
+    }
+
+    function getSelectedOption(question) {
+      const checked = document.querySelector(`input[name="${question.id}"]:checked`);
+      if (!checked) return null;
+      return question.options.find(opt => opt.value === checked.value);
+    }
+
+    function calculateType(selectedOptions) {
+      const scores = {
+        anshin: 0,
+        nagare: 0,
+        mamorare: 0,
+        yutakasa: 0,
+        jouka: 0
+      };
+
+      selectedOptions.forEach(opt => {
+        Object.keys(opt.scores).forEach(typeKey => {
+          scores[typeKey] += opt.scores[typeKey];
+        });
+      });
+
+      let topType = "anshin";
+      let maxScore = -1;
+
+      Object.keys(scores).forEach(typeKey => {
+        if (scores[typeKey] > maxScore) {
+          maxScore = scores[typeKey];
+          topType = typeKey;
+        }
+      });
+
+      return {
+        typeKey: topType,
+        scores
+      };
+    }
+
+    function buildMainMessage(name, selectedOptions, typeInfo) {
+      const selectedTexts = selectedOptions.map(opt => optionMessages[opt.value]).filter(Boolean);
+
+      return `<h3>${name}さんの今のエネルギー🌿</h3>
+${selectedTexts[0]}
+
+${selectedTexts[1]}
+
+${selectedTexts[2]}
+
+${selectedTexts[3]}
+
+${selectedTexts[4]}
+
+今のあなたには、<strong>${typeInfo.name}</strong>のエネルギーがやさしく合っていそうだよ。`;
+    }
+
+    function buildSummary(typeInfo) {
+      return `<h3>まとめメッセージ🌙</h3>
+${typeInfo.summary}`;
+    }
+
+    function buildHint(typeInfo) {
+      return `<h3>やさしいヒント🌈</h3>
+${typeInfo.hint}
+
+💫 今のあなたに合うエネルギーは
+<strong>${typeInfo.color}</strong>（${typeInfo.meaning}）`;
+    }
+
+    function showResult() {
+      const errorBox = document.getElementById("errorMessage");
+      errorBox.classList.add("hidden");
+      errorBox.textContent = "";
+
+      const selectedOptions = [];
+
+      for (const q of questions) {
+        const selected = getSelectedOption(q);
+        if (!selected) {
+          errorBox.textContent = "すべての質問に答えてね🐾";
+          errorBox.classList.remove("hidden");
+          return;
+        }
+        selectedOptions.push(selected);
+      }
+
+      const name = document.getElementById("userName").value.trim() || "あなた";
+      const result = calculateType(selectedOptions);
+      const typeInfo = typeData[result.typeKey];
+
+      document.getElementById("typeImageArea").innerHTML =
+        `<img src="${typeInfo.image}" alt="${typeInfo.name}" class="type-image">`;
+      document.getElementById("typeImageArea").classList.remove("hidden");
+
+      document.getElementById("typeBox").innerHTML = `
+<h3>今のあなたのタイプ💫</h3>
+<div class="type-name">${typeInfo.name}</div>
+${typeInfo.description}
+      `.trim().replace(/\n/g, "<br>");
+
+      document.getElementById("resultBox").innerHTML =
+        buildMainMessage(name, selectedOptions, typeInfo).replace(/\n/g, "<br>");
+
+      document.getElementById("summaryBox").innerHTML =
+        buildSummary(typeInfo).replace(/\n/g, "<br>");
+
+      document.getElementById("hintBox").innerHTML =
+        buildHint(typeInfo).replace(/\n/g, "<br>");
+
+      document.getElementById("questionSection").classList.add("hidden");
+      document.getElementById("resultSection").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function retryQuestions() {
+      document.getElementById("resultSection").classList.add("hidden");
+      document.getElementById("questionSection").classList.remove("hidden");
+
+      const radios = document.querySelectorAll('input[type="radio"]');
+      radios.forEach(radio => radio.checked = false);
+
+      document.getElementById("errorMessage").classList.add("hidden");
+      document.getElementById("errorMessage").textContent = "";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goFun() {
+      window.location.href = "https://lit.link/chappysally";
+    }
+
+    function goOrgonite() {
+      window.location.href = "https://lit.link/chappysally";
+    }
+  </script>
 </body>
 </html>
