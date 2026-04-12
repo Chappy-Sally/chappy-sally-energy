@@ -541,7 +541,7 @@
     }
 
     function getSelectedOption(question) {
-      const checked = document.querySelector(\`input[name="\${question.id}"]:checked\`);
+      const checked = document.querySelector(`input[name="${question.id}"]:checked`);
       if (!checked) return null;
       return question.options.find(opt => opt.value === checked.value);
     }
@@ -555,12 +555,12 @@
         trail: 0
       };
 
-      selectedValues.forEach(value => {
+      selectedValues.forEach((value) => {
         if (["light", "moving", "open", "light_word", "trust"].includes(value)) score.hikari += 2;
         if (["sensitive", "need_softness", "wobble", "fresh_air", "slowly"].includes(value)) score.kaze += 2;
         if (["clear", "need_flow", "stuck", "water", "flow"].includes(value)) score.kawa += 2;
-        if (["slow", "need_rest", "deep", "ground", "rest"].includes(value)) score.mori += 2;
-        if (["cloudy", "need_push", "moving", "pause", "daijobu"].includes(value)) score.trail += 2;
+        if (["slow", "need_rest", "deep", "ground", "rest", "need_space"].includes(value)) score.mori += 2;
+        if (["cloudy", "need_push", "pause", "daijobu"].includes(value)) score.trail += 2;
       });
 
       return Object.keys(score).reduce((a, b) => score[a] >= score[b] ? a : b);
@@ -608,7 +608,7 @@
       const typeInfo = typeData[typeKey];
 
       document.getElementById("typeImageArea").innerHTML =
-        \`<img src="\${typeInfo.image}" alt="\${typeInfo.name}" class="type-image">\`;
+        `<img src="${typeInfo.image}" alt="${typeInfo.name}" class="type-image">`;
       document.getElementById("typeImageArea").classList.remove("hidden");
 
       const typeHtml = `
@@ -647,7 +647,7 @@
       document.getElementById("questionSection").classList.remove("hidden");
 
       const radios = document.querySelectorAll('input[type="radio"]');
-      radios.forEach(radio => {
+      radios.forEach((radio) => {
         radio.checked = false;
       });
 
