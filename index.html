@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>チャッピー＆サリーのエナジーチェック</title>
+  <title>エナジーチェック</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +12,7 @@
     body {
       margin: 0;
       font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-      background: linear-gradient(180deg, #f7fbff 0%, #eef8ff 40%, #fdf6ff 100%);
+      background: linear-gradient(180deg, #f6fbff 0%, #eef8ff 38%, #f7fff7 72%, #fff9f4 100%);
       color: #333;
       font-size: 15px;
       line-height: 1.8;
@@ -26,10 +26,10 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 22px;
       padding: 18px;
-      box-shadow: 0 8px 24px rgba(118, 129, 189, 0.18);
+      box-shadow: 0 8px 24px rgba(118, 129, 189, 0.16);
       margin-bottom: 18px;
     }
 
@@ -38,49 +38,42 @@
       width: 100%;
       border-radius: 22px;
       display: block;
-      box-shadow: 0 10px 24px rgba(120, 120, 180, 0.18);
+      box-shadow: 0 10px 24px rgba(120, 120, 180, 0.16);
     }
 
     h1, h2, h3 {
       margin-top: 0;
-      color: #463fcf;
+      color: #3f54c8;
       line-height: 1.5;
+    }
+
+    .sub {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.75;
     }
 
     .center {
       text-align: center;
     }
 
-    .sub {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
     .hidden {
       display: none;
     }
 
-    .name-box,
-    .question-block,
-    .result-box,
-    .summary-box,
-    .hint-box,
-    .type-box,
-    .link-box {
-      background: linear-gradient(180deg, #f3f5ff, #fff7ff);
-      border: 2px solid #d8ddff;
+    .question-block {
+      margin-bottom: 20px;
+      padding: 14px;
       border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 16px;
-      line-height: 1.85;
+      background: #f9fbff;
+      border: 1px solid #e4ecff;
     }
 
     .question-title {
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 12px;
-      color: #4a5fd1;
+      color: #3c45b7;
       line-height: 1.7;
     }
 
@@ -92,7 +85,7 @@
     label.option {
       display: block;
       background: #fff;
-      border: 2px solid #dcdfff;
+      border: 2px solid #d8deff;
       border-radius: 14px;
       padding: 12px 14px;
       cursor: pointer;
@@ -102,22 +95,13 @@
     }
 
     label.option:hover {
-      border-color: #9aa4ff;
-      background: #f7f8ff;
+      border-color: #95a4ff;
+      background: #f7f9ff;
     }
 
     input[type="radio"] {
       margin-right: 8px;
-      transform: scale(1.08);
-    }
-
-    input[type="text"] {
-      width: 100%;
-      border: 2px solid #dcdfff;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 16px;
-      background: #fff;
+      transform: scale(1.05);
     }
 
     .btn {
@@ -134,9 +118,9 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #5964ff, #8f6bff);
+      background: linear-gradient(135deg, #5f7bff, #7c62ff);
       color: #fff;
-      box-shadow: 0 8px 18px rgba(95, 101, 255, 0.28);
+      box-shadow: 0 8px 18px rgba(95, 101, 255, 0.25);
     }
 
     .btn-primary:hover {
@@ -159,41 +143,41 @@
     }
 
     .result-box,
-    .summary-box,
-    .hint-box,
-    .type-box {
-      white-space: pre-line;
-      color: #333;
+    .type-box,
+    .hint-box {
+      background: linear-gradient(180deg, #f3f7ff, #fffdfd);
+      border: 2px solid #d8ddff;
+      border-radius: 18px;
+      padding: 16px;
+      line-height: 1.8;
       font-size: 15px;
+      margin-bottom: 16px;
+      color: #333;
+      text-align: left;
+    }
+
+    .result-box {
+      white-space: pre-line;
     }
 
     .result-box h3,
-    .summary-box h3,
-    .hint-box h3,
-    .type-box h3 {
+    .type-box h3,
+    .hint-box h3 {
       margin-top: 0;
       margin-bottom: 12px;
-      color: #4a5fd1;
+      color: #463fcf;
       line-height: 1.5;
-      font-size: 1.12em;
+      font-size: 1.08em;
       font-weight: bold;
       text-align: left;
     }
 
-    .type-name {
-      font-size: 20px;
-      font-weight: bold;
-      color: #4a5fd1;
-      margin-bottom: 8px;
-      line-height: 1.6;
-    }
-
-    .small-note {
-      color: #666;
+    .footer-note {
+      margin-top: 18px;
       font-size: 13px;
-      line-height: 1.75;
+      color: #666;
       text-align: center;
-      margin-top: 8px;
+      line-height: 1.75;
     }
 
     .alert {
@@ -206,13 +190,19 @@
     }
 
     .link-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #f9fbff;
+      border: 1px solid #e6ecff;
       text-align: center;
+      line-height: 1.75;
       color: #666;
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: 13px;
     }
 
     .link-box .btn {
+      width: auto;
       min-width: 220px;
     }
 
@@ -230,13 +220,13 @@
       }
 
       .question-title {
-        font-size: 17px;
+        font-size: 15px;
       }
 
       .sub,
-      .small-note,
-      .alert,
-      .link-box {
+      .footer-note,
+      .link-box,
+      .alert {
         font-size: 13px;
       }
 
@@ -246,11 +236,16 @@
       }
 
       .result-box,
-      .summary-box,
-      .hint-box,
-      .type-box {
+      .type-box,
+      .hint-box {
         font-size: 14px;
         line-height: 1.75;
+      }
+
+      .result-box h3,
+      .type-box h3,
+      .hint-box h3 {
+        font-size: 1.03em;
       }
 
       .btn {
@@ -269,80 +264,50 @@
 
     <!-- 表紙 -->
     <section id="coverSection" class="card center">
-     <img src="images/cs_energy.png" alt="チャッピー＆サリーのエナジーチェック表紙" class="cover-image">
+      <img src="./images/energy_cover.png" alt="エナジーチェック表紙" class="cover-image">
       <div class="btn-wrap">
-        <button class="btn btn-primary" onclick="showNameSection()">はじめる</button>
-      </div>
-    </section>
-
-    <!-- 名前入力 -->
-    <section id="nameSection" class="card hidden">
-      <h2 class="center">お名前を入れてね🐾</h2>
-      <p class="sub center">
-        あなたに向けたメッセージとして受け取りやすくなるよ🌿
-      </p>
-
-      <div class="name-box">
-        <div class="question-title">① お名前を入力してね</div>
-        <input type="text" id="userName" placeholder="例：サリー">
-      </div>
-
-      <div id="nameErrorMessage" class="alert hidden"></div>
-
-      <div class="btn-wrap">
-        <button class="btn btn-primary" onclick="showQuestionSection()">つぎへ</button>
-        <button class="btn btn-secondary" onclick="backToCover()">戻る</button>
+        <button class="btn btn-primary" onclick="showQuestionSection()">はじめる</button>
       </div>
     </section>
 
     <!-- 質問 -->
     <section id="questionSection" class="card hidden">
       <h2 class="center">エナジーチェック🐾</h2>
-      <p class="sub center">
-        5つの質問に答えてみてね。<br>
-        今のあなたに合うエネルギーを、やさしく見ていくよ🌈
-      </p>
+      <p class="sub center">5つの質問に答えてね。<br>今のあなたのエネルギー状態と、やさしい整え方をお届けするよ🌿</p>
 
       <div id="questionsArea"></div>
-
       <div id="errorMessage" class="alert hidden"></div>
 
       <div class="btn-wrap">
-        <button class="btn btn-primary" onclick="showResult()">メッセージを受け取る</button>
-        <button class="btn btn-secondary" onclick="backToName()">戻る</button>
+        <button class="btn btn-primary" onclick="showResult()">結果を見る</button>
       </div>
     </section>
 
     <!-- 結果 -->
     <section id="resultSection" class="card hidden">
-      <h2 class="center">あなたへのメッセージ🌈</h2>
+      <h2 class="center">今のあなたのエネルギー状態🌈</h2>
 
       <div id="typeImageArea" class="hidden" style="margin-bottom:16px;"></div>
       <div id="typeBox" class="type-box"></div>
       <div id="resultBox" class="result-box"></div>
-      <div id="summaryBox" class="summary-box"></div>
       <div id="hintBox" class="hint-box"></div>
 
       <div class="link-box">
-        ほかにも楽しく遊べるものがあるよ🐾✨
-        <div class="btn-wrap">
-          <button class="btn btn-secondary" onclick="goFun()">🌈 もっと遊ぶ</button>
-        </div>
+        このあとも、やさしく整う時間を過ごしたいときは🌿<br>
+        宇宙銀行ATMやおみくじなど、気軽に楽しめるものもあるよ🐾✨<br>
+        よかったらのぞいてみてね🌈<br><br>
+
+        <a href="https://lit.link/chappysally" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          🌈 もっと見てみる
+        </a>
       </div>
 
-      <div class="link-box">
-        今のあなたに合う子が、そっと寄り添ってくれるかも💎✨
-        <div class="btn-wrap">
-          <button class="btn btn-primary" onclick="goOrgonite()">💎 気になる子をのぞいてみる</button>
-        </div>
-      </div>
-
-      <div class="small-note">
-        このメッセージが、少しでも今のあなたのヒントになりますように🌿
+      <div class="footer-note">
+        今のあなたに合う整え方が、やさしく見えてきますように🌿
       </div>
 
       <div class="btn-wrap">
-        <button class="btn btn-secondary" onclick="retryQuestions()">もう一度やってみる</button>
+        <button class="btn btn-secondary" onclick="retryQuestions()">もう一度やる</button>
       </div>
     </section>
 
@@ -352,173 +317,197 @@
     const questions = [
       {
         id: "q1",
-        title: "② 今いちばん近いのは？",
+        title: "① 今のエネルギーにいちばん近いのは？",
         options: [
-          { value: "tired", label: "少し疲れてる", scores: { anshin: 3, jouka: 1 } },
-          { value: "stuck", label: "流れが止まってる感じ", scores: { nagare: 3, jouka: 1 } },
-          { value: "sensitive", label: "守られたい感じ", scores: { mamorare: 3, anshin: 1 } },
-          { value: "wantmore", label: "もっと受け取りたい", scores: { yutakasa: 3, nagare: 1 } },
-          { value: "refresh", label: "スッキリ整えたい", scores: { jouka: 3, anshin: 1 } }
+          {
+            value: "light",
+            label: "軽い・前向き",
+            message: "今のあなたには、木々の間から光が差し込むような明るさがあります✨\n\n進みたい気持ちが自然に湧いてきていて、エネルギーも前へ向かいやすい時です。"
+          },
+          {
+            value: "slow",
+            label: "少し重たい・ゆっくりしたい",
+            message: "今は森のトレイルを急がず歩くようなペースが合いそうです🌿\n\n無理に動こうとするより、風を感じるようにやさしく整えるほうが自然な流れになりそう。"
+          },
+          {
+            value: "cloudy",
+            label: "ぼんやり・はっきりしない",
+            message: "今は森の中で霧が少しかかっているような状態かも☁️\n\n先が全部見えなくても大丈夫。光は少しずつ入ってきます。"
+          },
+          {
+            value: "sensitive",
+            label: "人や空気に敏感",
+            message: "今のあなたは、風の通りや音の違いにも気づきやすい繊細な時期かもしれません🌙\n\n外の刺激を受けやすいからこそ、自分に戻る小さな時間が大切です。"
+          },
+          {
+            value: "clear",
+            label: "落ち着いている",
+            message: "川の流れが静かに続くように、今のあなたには落ち着いたエネルギーがあります💧\n\n大きく乱れず、自分の感覚も受け取りやすい時です。"
+          }
         ]
       },
       {
         id: "q2",
-        title: "③ 今ほしい感覚は？",
+        title: "② 今のあなたに近いのは？",
         options: [
-          { value: "peace", label: "ホッと安心したい", scores: { anshin: 3 } },
-          { value: "flow", label: "流れを良くしたい", scores: { nagare: 3 } },
-          { value: "guard", label: "守られていたい", scores: { mamorare: 3 } },
-          { value: "receive", label: "豊かさを受け取りたい", scores: { yutakasa: 3 } },
-          { value: "clear", label: "いったんリセットしたい", scores: { jouka: 3 } }
+          {
+            value: "need_rest",
+            label: "少し休みたい",
+            message: "今はトレイルの途中で立ち止まり、木陰でひと息つくような時間が必要そうです🌿\n\n休むことも、整う流れの一部です。"
+          },
+          {
+            value: "need_push",
+            label: "背中を押してほしい",
+            message: "今のあなたには、森の先に見える光のような小さなきっかけがあると流れが動きやすそうです✨\n\n大きな一歩じゃなくて大丈夫。"
+          },
+          {
+            value: "need_space",
+            label: "ひとりの時間がほしい",
+            message: "森の静かな小道をひとりで歩くような時間が、今のあなたを整えてくれそうです🌲\n\n少し距離をとることで、本来の感覚が戻ってきそう。"
+          },
+          {
+            value: "need_flow",
+            label: "流れをよくしたい",
+            message: "川のせせらぎのように、今は滞りをほどいて流れをなめらかにしたい時かもしれません💧\n\n整えようとしすぎず、まずは通りをよくするイメージで。"
+          },
+          {
+            value: "need_softness",
+            label: "安心したい",
+            message: "今のあなたに必要なのは、答えよりも、やさしい風が通るような安心感なのかもしれません🍃\n\nほっとできるものを増やすことが整いにつながりそうです。"
+          }
         ]
       },
       {
         id: "q3",
-        title: "④ 最近ピンとくる言葉は？",
+        title: "③ いちばん近い状態は？",
         options: [
-          { value: "yasuragi", label: "やすらぎ", scores: { anshin: 2, mamorare: 1 } },
-          { value: "meguri", label: "めぐり", scores: { nagare: 2, yutakasa: 1 } },
-          { value: "mamori", label: "守り", scores: { mamorare: 2, anshin: 1 } },
-          { value: "uketori", label: "受け取り", scores: { yutakasa: 2, nagare: 1 } },
-          { value: "joka", label: "浄化", scores: { jouka: 2, anshin: 1 } }
+          {
+            value: "moving",
+            label: "進みたい",
+            message: "光の差すトレイルを前へ進みたい気持ちが、ちゃんと育っています✨\n\n焦らず、自分に合う歩幅で進めば大丈夫。"
+          },
+          {
+            value: "wobble",
+            label: "揺れている",
+            message: "風に葉が揺れるように、今は心が少し揺れやすいタイミングかも🌿\n\n揺れていること自体は悪いことではなく、整い直している途中なのかもしれません。"
+          },
+          {
+            value: "stuck",
+            label: "停滞している感じ",
+            message: "川の流れが少しゆるやかになっているように、今は動きが弱まっているだけかもしれません💧\n\n無理に動かすより、まずは整えてみてね。"
+          },
+          {
+            value: "open",
+            label: "ひらいている感じ",
+            message: "木々の間から差し込む光のように、今のあなたは受け取りやすく開いている状態です🌈\n\nいい流れを自然に受け取りやすい時だよ。"
+          },
+          {
+            value: "deep",
+            label: "深く感じている",
+            message: "森の奥へ入っていくように、今は表面よりも深い感覚に触れやすい時です🌙\n\n静かな気づきが大切な鍵になりそう。"
+          }
         ]
       },
       {
         id: "q4",
-        title: "⑤ 直感で選ぶなら？",
+        title: "④ 今のあなたに必要そうなのは？",
         options: [
-          { value: "green", label: "やさしくゆるむ感じ", scores: { anshin: 2 } },
-          { value: "blue", label: "軽やかに流れる感じ", scores: { nagare: 2 } },
-          { value: "purple", label: "静かに守られる感じ", scores: { mamorare: 2 } },
-          { value: "gold", label: "キラッとめぐる感じ", scores: { yutakasa: 2 } },
-          { value: "clear2", label: "スーッと澄む感じ", scores: { jouka: 2 } }
+          {
+            value: "light_word",
+            label: "明るい言葉",
+            message: "今のあなたには、木漏れ日のようなやさしい言葉がよくしみそうです✨\n\n強い言葉より、ほっとする言葉を選んでみてね。"
+          },
+          {
+            value: "fresh_air",
+            label: "空気を変えること",
+            message: "今は風を通すように、空気を入れ替えることが整いにつながりそうです🍃\n\n窓を開けたり、少し外の空気を感じるだけでも違いそう。"
+          },
+          {
+            value: "water",
+            label: "流すこと",
+            message: "川のように流していくことが今のテーマかもしれません💧\n\nためこむより、少しずつ外へ流していくイメージが合いそうです。"
+          },
+          {
+            value: "ground",
+            label: "落ち着くこと",
+            message: "森の道をしっかり踏みしめるように、今は足元を整えることが大切そうです🌲\n\n安心できる土台を思い出してみてね。"
+          },
+          {
+            value: "pause",
+            label: "立ち止まること",
+            message: "トレイルの途中で景色を見るように、今は少し立ち止まることで見えるものがありそうです🌿\n\n急がなくても大丈夫。"
+          }
         ]
       },
       {
         id: "q5",
-        title: "⑥ 今の自分にかけるなら？",
+        title: "⑤ 今の自分にかけるなら？",
         options: [
-          { value: "daijoubu", label: "大丈夫", scores: { anshin: 2 } },
-          { value: "nagareteiku", label: "自然に流れていく", scores: { nagare: 2 } },
-          { value: "mamorareteru", label: "守られてる", scores: { mamorare: 2 } },
-          { value: "uketotteii", label: "受け取っていい", scores: { yutakasa: 2 } },
-          { value: "karukunaru", label: "軽くなっていい", scores: { jouka: 2 } }
+          {
+            value: "daijobu",
+            label: "大丈夫",
+            message: "先が全部見えなくても、道はちゃんと続いています🌿\n\n今のあなたにも『大丈夫』って言ってあげてね。"
+          },
+          {
+            value: "slowly",
+            label: "ゆっくりでいい",
+            message: "トレイルはゆっくり歩くから見える景色があります🍃\n\n今は急がなくて大丈夫。"
+          },
+          {
+            value: "trust",
+            label: "その感覚を信じて",
+            message: "風や光を感じるように、あなたの感覚にもちゃんと意味があります✨\n\n信じていいよ。"
+          },
+          {
+            value: "rest",
+            label: "休んでいい",
+            message: "森の木陰で休むみたいに、今は立ち止まることも大切な流れです🌲\n\n休んでいいよ。"
+          },
+          {
+            value: "flow",
+            label: "流れていくよ",
+            message: "川の水が少しずつ流れていくように、今のこともちゃんと動いていきます💧\n\n今は安心していて大丈夫。"
+          }
         ]
       }
     ];
 
     const typeData = {
-      anshin: {
-        name: "ほっと安心タイプ🌿",
-        image: "./images/energy_anshin.png",
-        color: "💚 緑系",
-        meaning: "癒し・安心・回復",
-        description: "今のあなたは、まず“ホッとできる感覚”を大切にすると整いやすいみたい🌿\nがんばるより、安心してゆるめることが鍵になりそうだよ。",
-        summary: "今は無理に進もうとするより、安心できる感覚を先に取り戻すことで、自然と整っていきそう🐾",
-        hint: "まずは、心がホッとする方を選んでみてね。少しゆるむだけでも流れは変わっていくよ。"
+      hikari: {
+        name: "光のタイプ✨",
+        description: "今のあなたは、木々の間から差し込む光のような明るさを持っています。\n動き出す力や前向きさが自然と育ちやすい時です。",
+        image: "./images/cs_hirameki.png",
+        hint: "新しいことを始めるよりも、『今ある光を受け取る』意識が合いやすそう。"
       },
-      nagare: {
-        name: "流れアップタイプ💫",
-        image: "./images/energy_nagare.png",
-        color: "💙 青系",
-        meaning: "流れ・軽やかさ・スムーズ",
-        description: "今のあなたは、止まっていた空気をやさしく動かしていくと流れが戻りやすそう💫\n大きく変えなくても、整えることで自然に動きやすくなるよ。",
-        summary: "今は“無理に押す”より、“通りをよくする”意識がぴったりのタイミングみたい✨",
-        hint: "小さな変化でも大丈夫。軽やかさを思い出すように、ひとつだけ風通しをよくしてみてね。"
+      kaze: {
+        name: "風のタイプ🍃",
+        description: "今のあなたは、風が通るように空気を変えることで整いやすいタイプです。\n重さを抱え込むより、やわらかく巡らせるのが合っています。",
+        image: "./images/cs_yasashisa.png",
+        hint: "窓を開ける、深呼吸する、少し外に出る。\nそんな小さな動きが流れを変えてくれそう。"
       },
-      mamorare: {
-        name: "守られタイプ🛡️",
-        image: "./images/energy_mamorare.png",
-        color: "💜 紫系",
-        meaning: "守護・落ち着き・深い整え",
-        description: "今のあなたは、まず自分を守る感覚を取り戻すことで安心しやすくなりそう🛡️\n静かに整えながら、落ち着いて進める流れにぴったりだよ。",
-        summary: "今は自分を守ることを先にして大丈夫。安心が戻ると、次の流れも見えやすくなりそう🌙",
-        hint: "人や空気に合わせすぎないでね。まずは、自分が落ち着く方を選ぶのが今のヒントだよ。"
+      kawa: {
+        name: "川のタイプ💧",
+        description: "今のあなたは、川の流れのように『ためこまず流す』ことで整いやすいタイプです。\n少しずつでも巡りを戻すことが大切そう。",
+        image: "./images/cs_baransu.png",
+        hint: "考えすぎた時は、全部整えようとせず、まず一つだけ流してみてね。"
       },
-      yutakasa: {
-        name: "豊かさめぐるタイプ✨",
-        image: "./images/energy_yutakasa.png",
-        color: "✨ ゴールド系",
-        meaning: "豊かさ・循環・受け取り",
-        description: "今のあなたは、受け取ることやめぐりをよくすることがテーマみたい✨\n“もっと受け取っていい”とゆるすほど、やさしく流れが動き出しそうだよ。",
-        summary: "今は“まだ足りない”より、“今あるもの”に目を向けることで、めぐりが良くなっていきそう💫",
-        hint: "小さな受け取りも大事にしてみてね。うれしい・ありがたいを感じるほど、豊かさが近づきやすくなるよ。"
+      mori: {
+        name: "森のタイプ🌲",
+        description: "今のあなたは、森の静けさの中で回復しやすいタイプです。\n刺激を減らして、自分の感覚に戻る時間が鍵になりそう。",
+        image: "./images/cs_naikan.png",
+        hint: "ひとり時間、静かな場所、落ち着く香りなどが助けになりそう。"
       },
-      jouka: {
-        name: "スッキリ浄化タイプ🤍",
-        image: "./images/energy_jouka.png",
-        color: "🤍 クリア系",
-        meaning: "浄化・リセット・整え",
-        description: "今のあなたは、いったん整え直してスーッと軽くなる流れに合っていそう🤍\n抱えすぎたものをほどくことで、やさしく本来の自分に戻りやすくなりそうだよ。",
-        summary: "今は“足す”より“ほどく”タイミングかも。少しスッキリするだけで空気が変わっていきそう✨",
-        hint: "がんばって全部抱えなくて大丈夫。ひとつでも手放せたら、それだけで十分整いはじめるよ。"
+      trail: {
+        name: "トレイルタイプ🌿",
+        description: "今のあなたは、森のトレイルを歩いているような時期かもしれません。\n先が全部見えなくても、道はちゃんと続いています。",
+        image: "./images/cs_koudou.png",
+        hint: "答えを急がず、一歩ずつ進むことで自然と整っていきそうです。"
       }
     };
-
-    const optionMessages = {
-      tired: "少し疲れがたまっていて、安心や休息を受け取りたい気持ちがあるのかも。",
-      stuck: "今は流れが少し止まりやすくて、スムーズさを取り戻したいタイミングみたい。",
-      sensitive: "外の影響を受けやすくなっていて、安心できる守りがほしいのかもしれないね。",
-      wantmore: "もっと受け取っていい流れに開いていきたい、そんな気持ちがありそうだよ。",
-      refresh: "いったんスッキリ整えて、軽くなりたい思いが強まっているみたい。",
-
-      peace: "心の奥では、まずホッとできる安心感を大切にしたいのかも🌿",
-      flow: "今は止まっているものをやさしく動かしたい気持ちがありそう💫",
-      guard: "まずは守られている感覚があると、安心して進めそうだね🛡️",
-      receive: "受け取ることをゆるすほど、やさしく豊かさがめぐってきそう✨",
-      clear: "少しリセットして、空気をスーッと整えたいタイミングみたい🤍",
-
-      yasuragi: "“やすらぎ”という感覚が、今のあなたには大切なキーワードかもしれないね。",
-      meguri: "“めぐり”を良くしていくことが、今の流れの後押しになりそうだよ。",
-      mamori: "“守り”を意識すると、今のあなたは落ち着きやすくなりそう。",
-      uketori: "“受け取り”を自分にゆるすことが、今のテーマになっていそうだね。",
-      joka: "“浄化”や“整え直し”が、今のあなたにはぴったりの空気みたい。",
-
-      green: "やさしくゆるむ感覚が、今のあなたに合っていそう🌿",
-      blue: "軽やかに流れる感じが、今のあなたを後押ししてくれそう💙",
-      purple: "静かに守られる感覚が、今の安心につながりそう💜",
-      gold: "キラッとめぐる感覚が、今のあなたにぴったりかも✨",
-      clear2: "スーッと澄んでいく感覚が、今のあなたを整えてくれそう🤍",
-
-      daijoubu: "“大丈夫”と自分に言ってあげることが、今のやさしい支えになりそうだよ。",
-      nagareteiku: "“自然に流れていく”とゆるすことで、力が抜けて整いやすくなりそう。",
-      mamorareteru: "“守られてる”という感覚を思い出すと、落ち着いて進みやすくなりそうだね。",
-      uketotteii: "“受け取っていい”と自分にゆるすことで、めぐりがやわらかく開きそう✨",
-      karukunaru: "“軽くなっていい”と許すだけでも、少しずつ空気が変わっていきそうだよ。"
-    };
-
-    function showNameSection() {
-      document.getElementById("coverSection").classList.add("hidden");
-      document.getElementById("nameSection").classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function backToCover() {
-      document.getElementById("nameSection").classList.add("hidden");
-      document.getElementById("coverSection").classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function backToName() {
-      document.getElementById("questionSection").classList.add("hidden");
-      document.getElementById("nameSection").classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
 
     function showQuestionSection() {
-      const name = document.getElementById("userName").value.trim();
-      const errorBox = document.getElementById("nameErrorMessage");
-
-      errorBox.classList.add("hidden");
-      errorBox.textContent = "";
-
-      if (!name) {
-        errorBox.textContent = "お名前を入れてね🐾";
-        errorBox.classList.remove("hidden");
-        return;
-      }
-
-      document.getElementById("nameSection").classList.add("hidden");
+      document.getElementById("coverSection").classList.add("hidden");
+      document.getElementById("resultSection").classList.add("hidden");
       document.getElementById("questionSection").classList.remove("hidden");
       renderQuestions();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -552,70 +541,49 @@
     }
 
     function getSelectedOption(question) {
-      const checked = document.querySelector(`input[name="${question.id}"]:checked`);
+      const checked = document.querySelector(\`input[name="\${question.id}"]:checked\`);
       if (!checked) return null;
       return question.options.find(opt => opt.value === checked.value);
     }
 
-    function calculateType(selectedOptions) {
-      const scores = {
-        anshin: 0,
-        nagare: 0,
-        mamorare: 0,
-        yutakasa: 0,
-        jouka: 0
+    function getTypeKey(selectedValues) {
+      const score = {
+        hikari: 0,
+        kaze: 0,
+        kawa: 0,
+        mori: 0,
+        trail: 0
       };
 
-      selectedOptions.forEach(opt => {
-        Object.keys(opt.scores).forEach(typeKey => {
-          scores[typeKey] += opt.scores[typeKey];
-        });
+      selectedValues.forEach(value => {
+        if (["light", "moving", "open", "light_word", "trust"].includes(value)) score.hikari += 2;
+        if (["sensitive", "need_softness", "wobble", "fresh_air", "slowly"].includes(value)) score.kaze += 2;
+        if (["clear", "need_flow", "stuck", "water", "flow"].includes(value)) score.kawa += 2;
+        if (["slow", "need_rest", "deep", "ground", "rest"].includes(value)) score.mori += 2;
+        if (["cloudy", "need_push", "moving", "pause", "daijobu"].includes(value)) score.trail += 2;
       });
 
-      let topType = "anshin";
-      let maxScore = -1;
-
-      Object.keys(scores).forEach(typeKey => {
-        if (scores[typeKey] > maxScore) {
-          maxScore = scores[typeKey];
-          topType = typeKey;
-        }
-      });
-
-      return {
-        typeKey: topType,
-        scores
-      };
+      return Object.keys(score).reduce((a, b) => score[a] >= score[b] ? a : b);
     }
 
-    function buildMainMessage(name, selectedOptions, typeInfo) {
-      const selectedTexts = selectedOptions.map(opt => optionMessages[opt.value]).filter(Boolean);
+    function buildSummary(selectedValues) {
+      if (selectedValues.includes("need_rest") || selectedValues.includes("rest") || selectedValues.includes("slow")) {
+        return "今のあなたは、森のトレイルの途中で少し立ち止まり、木陰で休みながら風を感じる時間が必要なタイミングかも🌿\n\nがんばることよりも、まず安心してゆるむことが整いにつながりそうです。\n\n木々の間から差し込む光のように、『休んでいい』というサインを受け取ってみてね。";
+      }
 
-      return `<h3>${name}さんの今のエネルギー🌿</h3>
-${selectedTexts[0]}
+      if (selectedValues.includes("cloudy") || selectedValues.includes("wobble") || selectedValues.includes("pause")) {
+        return "今のあなたは、森のトレイルを歩いているような状態かもしれません🌲\n\n先が全部見えなくても大丈夫。道はちゃんと続いていて、必要な光は少しずつ差し込んできます。\n\n風や景色を感じながら、自分のペースで進めば大丈夫だよ。";
+      }
 
-${selectedTexts[1]}
+      if (selectedValues.includes("moving") || selectedValues.includes("light") || selectedValues.includes("open")) {
+        return "今のあなたには、光の差す道を進む力がちゃんとあります✨\n\n焦らず、自分に合う歩幅で進むことで、やさしい流れが自然とひらいていきそうです。\n\n風を感じながら、一歩ずつ進んでいけば大丈夫。";
+      }
 
-${selectedTexts[2]}
+      if (selectedValues.includes("need_softness") || selectedValues.includes("daijobu") || selectedValues.includes("fresh_air")) {
+        return "今のあなたにいちばん必要なのは、答えよりも、ほっとできる安心感なのかもしれません🍃\n\n森の中に風がやさしく通るように、心がゆるむ時間を少しずつ増やしていくことで整っていきそうです。";
+      }
 
-${selectedTexts[3]}
-
-${selectedTexts[4]}
-
-今のあなたには、<strong>${typeInfo.name}</strong>のエネルギーがやさしく合っていそうだよ。`;
-    }
-
-    function buildSummary(typeInfo) {
-      return `<h3>まとめメッセージ🌙</h3>
-${typeInfo.summary}`;
-    }
-
-    function buildHint(typeInfo) {
-      return `<h3>やさしいヒント🌈</h3>
-${typeInfo.hint}
-
-💫 今のあなたに合うエネルギーは
-<strong>${typeInfo.color}</strong>（${typeInfo.meaning}）`;
+      return "今のあなたは、森と光と川の流れの中にいるような時かもしれません🌈\n\n無理に変えようとしなくても、風を感じながら、自分の感覚を受け取ることで自然と整っていきそうです。\n\n今のあなたにも、ちゃんと流れがあります。";
     }
 
     function showResult() {
@@ -635,28 +603,39 @@ ${typeInfo.hint}
         selectedOptions.push(selected);
       }
 
-      const name = document.getElementById("userName").value.trim() || "あなた";
-      const result = calculateType(selectedOptions);
-      const typeInfo = typeData[result.typeKey];
+      const selectedValues = selectedOptions.map(opt => opt.value);
+      const typeKey = getTypeKey(selectedValues);
+      const typeInfo = typeData[typeKey];
 
       document.getElementById("typeImageArea").innerHTML =
-        `<img src="${typeInfo.image}" alt="${typeInfo.name}" class="type-image">`;
+        \`<img src="\${typeInfo.image}" alt="\${typeInfo.name}" class="type-image">\`;
       document.getElementById("typeImageArea").classList.remove("hidden");
 
-      document.getElementById("typeBox").innerHTML = `
-<h3>今のあなたのタイプ💫</h3>
-<div class="type-name">${typeInfo.name}</div>
-${typeInfo.description}
-      `.trim().replace(/\n/g, "<br>");
+      const typeHtml = `
+        <h3>今のあなたのエネルギータイプ</h3>
+        <strong>${typeInfo.name}</strong><br>
+        ${typeInfo.description.replace(/\n/g, "<br>")}
+      `;
 
-      document.getElementById("resultBox").innerHTML =
-        buildMainMessage(name, selectedOptions, typeInfo).replace(/\n/g, "<br>");
+      const resultMessages = selectedOptions.map(opt => opt.message).join("\n\n");
+      const summary = buildSummary(selectedValues);
 
-      document.getElementById("summaryBox").innerHTML =
-        buildSummary(typeInfo).replace(/\n/g, "<br>");
+      const resultHtml = `
+        <h3>今のあなたに届いたメッセージ🌿</h3>
+        ${resultMessages.replace(/\n/g, "<br>")}
+        <br><br>
+        <h3>まとめメッセージ</h3>
+        ${summary.replace(/\n/g, "<br>")}
+      `;
 
-      document.getElementById("hintBox").innerHTML =
-        buildHint(typeInfo).replace(/\n/g, "<br>");
+      const hintHtml = `
+        <h3>やさしい整え方のヒント✨</h3>
+        ${typeInfo.hint.replace(/\n/g, "<br>")}
+      `;
+
+      document.getElementById("typeBox").innerHTML = typeHtml;
+      document.getElementById("resultBox").innerHTML = resultHtml;
+      document.getElementById("hintBox").innerHTML = hintHtml;
 
       document.getElementById("questionSection").classList.add("hidden");
       document.getElementById("resultSection").classList.remove("hidden");
@@ -668,20 +647,14 @@ ${typeInfo.description}
       document.getElementById("questionSection").classList.remove("hidden");
 
       const radios = document.querySelectorAll('input[type="radio"]');
-      radios.forEach(radio => radio.checked = false);
+      radios.forEach(radio => {
+        radio.checked = false;
+      });
 
       document.getElementById("errorMessage").classList.add("hidden");
       document.getElementById("errorMessage").textContent = "";
 
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function goFun() {
-      window.location.href = "https://lit.link/chappysally";
-    }
-
-    function goOrgonite() {
-      window.location.href = "https://lit.link/chappysally";
     }
   </script>
 </body>
