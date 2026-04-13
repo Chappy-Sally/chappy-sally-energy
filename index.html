@@ -637,29 +637,36 @@ ${summaryMap[typeKey] || typeInfo.summary}`;
     }
 
     function buildHint(typeKey, typeInfo) {
-    function buildHint(typeInfo) {
-
   let trailText = "";
 
-  if (typeInfo.name.includes("安心")) {
+  if (typeKey === "anshin") {
     trailText = "🌿森のトレイルをゆっくり歩くみたいに\n急がず、安心できる感覚を選ぶことで\n自然と整っていきそうだよ。";
   }
 
-  if (typeInfo.name.includes("流れ")) {
+  if (typeKey === "nagare") {
     trailText = "🌬️風が通るトレイルのように\n少しだけ滞っている場所をゆるめることで\n流れがやさしく動き出しそうだよ。";
   }
 
-  if (typeInfo.name.includes("守られ")) {
+  if (typeKey === "mamorare") {
     trailText = "🌲森のトレイルの途中で木陰に入るみたいに\n静かに落ち着ける場所や時間を選ぶことで\n安心が戻ってきそうだよ。";
   }
 
-  if (typeInfo.name.includes("豊かさ")) {
+  if (typeKey === "yutakasa") {
     trailText = "✨光が差し込むトレイルを歩くみたいに\n今あるものに気づいて受け取ることで\nやさしく豊かさがめぐっていきそうだよ。";
   }
 
-  if (typeInfo.name.includes("浄化")) {
+  if (typeKey === "jouka") {
     trailText = "💧川のそばのトレイルを歩くみたいに\n少しずつ手放していくことで\n軽やかさが戻ってきそうだよ。";
   }
+
+  return `<h3>やさしいヒント🌈</h3>
+${typeInfo.hint}
+
+${trailText}
+
+💫 今のあなたに合うエネルギーは
+<strong>${typeInfo.color}</strong>（${typeInfo.meaning}）`;
+}
 
   return `<h3>やさしいヒント🌈</h3>
 ${typeInfo.hint}
