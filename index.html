@@ -637,44 +637,38 @@ ${summaryMap[typeKey] || typeInfo.summary}`;
     }
 
     function buildHint(typeKey, typeInfo) {
-      const trailHintMap = {
-        anshin: `まずは、心がホッとする方を選んでみてね。
-少しゆるむだけでも流れは変わっていくよ。
+    function buildHint(typeInfo) {
 
-🌿 森の中で深呼吸するように
-安心できる空気を増やすことが、今のあなたの整え方になりそう。`,
+  let trailText = "";
 
-        nagare: `小さな変化でも大丈夫。
-軽やかさを思い出すように、ひとつだけ風通しをよくしてみてね。
+  if (typeInfo.name.includes("安心")) {
+    trailText = "🌿森のトレイルをゆっくり歩くみたいに\n急がず、安心できる感覚を選ぶことで\n自然と整っていきそうだよ。";
+  }
 
-💧 川の流れみたいに
-少しずつでも動き出すと、全体の流れもやわらかく変わっていきそう。`,
+  if (typeInfo.name.includes("流れ")) {
+    trailText = "🌬️風が通るトレイルのように\n少しだけ滞っている場所をゆるめることで\n流れがやさしく動き出しそうだよ。";
+  }
 
-        mamorare: `人や空気に合わせすぎないでね。
-まずは、自分が落ち着く方を選ぶのが今のヒントだよ。
+  if (typeInfo.name.includes("守られ")) {
+    trailText = "🌲森のトレイルの途中で木陰に入るみたいに\n静かに落ち着ける場所や時間を選ぶことで\n安心が戻ってきそうだよ。";
+  }
 
-🌲 森の木陰に入るみたいに
-静かに落ち着ける場所や時間を選ぶことが助けになりそう。`,
+  if (typeInfo.name.includes("豊かさ")) {
+    trailText = "✨光が差し込むトレイルを歩くみたいに\n今あるものに気づいて受け取ることで\nやさしく豊かさがめぐっていきそうだよ。";
+  }
 
-        yutakasa: `小さな受け取りも大事にしてみてね。
-うれしい・ありがたいを感じるほど、豊かさが近づきやすくなるよ。
+  if (typeInfo.name.includes("浄化")) {
+    trailText = "💧川のそばのトレイルを歩くみたいに\n少しずつ手放していくことで\n軽やかさが戻ってきそうだよ。";
+  }
 
-✨ 木漏れ日を受け取るように
-やさしい光を受け入れる感覚が、今の流れに合っていそう。`,
+  return `<h3>やさしいヒント🌈</h3>
+${typeInfo.hint}
 
-        jouka: `がんばって全部抱えなくて大丈夫。
-ひとつでも手放せたら、それだけで十分整いはじめるよ。
-
-🍃 風が通るように
-少し力を抜くだけでも、空気がやさしく入れ替わっていきそう。`
-      };
-
-      return `<h3>やさしいヒント🌈</h3>
-${trailHintMap[typeKey] || typeInfo.hint}
+${trailText}
 
 💫 今のあなたに合うエネルギーは
 <strong>${typeInfo.color}</strong>（${typeInfo.meaning}）`;
-    }
+}
 
     function showResult() {
       const errorBox = document.getElementById("errorMessage");
